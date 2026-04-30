@@ -2,6 +2,121 @@
 
 A static website generator that publishes music project information from the music-projects-database workspace.
 
+## Build Pipeline
+
+### Workflow Overview
+
+```
+Database Changes          Build              Deployment
+──────────────────────────────────────────────────────────
+Edit database
+(../music-projects-database/)
+        │
+        ├─→ [COMMIT database changes]
+        │
+        ├─→ Run: python3 generate.py
+        │
+        ├─→ Review generated HTML
+        │   (html/*.html)
+        │
+        ├─→ [COMMIT generated files]
+        │
+        └─→ Deploy html/ folder
+            (GitHub Pages, Netlify, etc.)
+```
+
+### Step-by-Step Workflow
+
+#### 1. Edit Database Content
+
+Make changes in `../music-projects-database/`:
+```bash
+cd ../music-projects-database
+
+# Add/edit entries in music-projects/, agenda/, repertoire/, etc.
+vim music-projects/my-project.md
+vim agenda/2024-05-15-concert.md
+
+# Commit database changes
+git add .
+git commit -m "Add concert on May 15, 2024"
+```
+
+#### 2. Generate Static Website
+
+```bash
+cd ../music-projects-website
+
+# Build static HTML from updated database
+python3 generate.py
+
+# Output:
+# Loading database...
+# Generating 3 project pages...
+# ✓ Generated index.html
+# ✓ Generated festa.html (45 agenda, 26 music)
+# ✓ Generated a-day-with-arianna.html (1 agenda, 4 music)
+# ✓ Generated echos-of-venice.html (5 agenda, 13 music)
+```
+
+#### 3. Test the Generated Site
+
+```bash
+# Open in browser to review
+open html/index.html
+
+# Manual checks:
+# - Homepage shows updated projects
+# - All tabs load correctly
+# - New agenda items appear in Schedule tab
+# - New repertoire items appear in Music/Divisi tabs
+# - Links work (score PDFs, navigation)
+# - Responsive design works on mobile
+```
+
+#### 4. Commit Generated Files
+
+```bash
+# Stage only the generated HTML changes
+git add html/
+
+# Commit with reference to database changes
+git commit -m "Rebuild website after adding May concert
+
+- Regenerated from updated music-projects-database
+- 45 agenda items now in Festa schedule
+- All pages reflect latest database state"
+```
+
+#### 5. Deploy to Production
+
+```bash
+# Push to GitHub Pages
+git push origin main
+git subtree push --prefix html origin gh-pages
+
+# Or deploy to Netlify/Vercel
+# (automatic if configured with build command: python3 generate.py)
+```
+
+### Important Rules
+
+⚠️ **Always commit database changes BEFORE running generate.py**
+- Database is the source of truth
+- Build artifacts (HTML) are derived from database
+- This makes it easy to see what changed: git diff shows DB edits
+
+⚠️ **Always run generate.py BEFORE committing HTML**
+- Never hand-edit html/ files
+- HTML is generated, not written manually
+- Re-running generate.py keeps everything in sync
+
+⚠️ **Test locally before deploying**
+- Review html/index.html after building
+- Check all tabs and links work
+- Test on mobile browser
+- Then commit and push
+
 ## Quick Start
 
 ### Build the Website
@@ -90,13 +205,78 @@ To add/edit content:
 
 See `../music-projects-database/README.md` and `../music-projects-database/Notion.md` for complete database schema and field definitions.
 
+## When to Rebuild
+
+### Manual Rebuild
+
+Run `python3 generate.py` whenever you:
+- Add a new project to the database
+- Edit project details (description, year, status)
+- Add/remove rehearsals or concerts
+- Update repertoire or divisi information
+- Change location information
+- Update score URLs or composer details
+
+### Automatic Rebuild (Recommended)
+
+**GitHub Actions** (free with GitHub):
+
+Create `.github/workflows/build.yml`:
+```yaml
+name: Build Website
+
+on:
+  push:
+    paths:
+      - '../music-projects-database/**'
+      - 'generate.py'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: python3 generate.py
+      - run: git add html/
+      - run: git commit -m "Auto-rebuild website"
+      - run: git push
+```
+
+This automatically rebuilds whenever database changes are pushed.
+
+**Netlify** (one-click setup):
+
+1. Connect repo to Netlify
+2. Set build command: `python3 generate.py`
+3. Set publish directory: `html/`
+4. Save — Netlify rebuilds on every push
+
 ## Deployment
 
 The `html/` folder is ready for static hosting:
 
 - **GitHub Pages** — Push `html/` to `gh-pages` branch
+  ```bash
+  git subtree push --prefix html origin gh-pages
+  ```
+
 - **Netlify** — Connect repo, set build command to `python3 generate.py`, publish folder to `html/`
+  - Builds automatically on every push
+
 - **Vercel** — Similar setup as Netlify
+  - Create `vercel.json`:
+  ```json
+  {
+    "buildCommand": "python3 generate.py",
+    "outputDirectory": "html"
+  }
+  ```
+
 - **Any static host** — Upload contents of `html/` folder
 
 ## POC Status
@@ -107,6 +287,52 @@ Current build includes 3 proof-of-concept projects:
 - Echos of Venice (2027, 5 rehearsals, 13 music pieces)
 
 To add more projects, modify `POC_PROJECTS` list in `generate.py` and regenerate.
+
+---
+
+## Troubleshooting
+
+### Build fails or produces empty pages
+
+**Problem**: Generated HTML is empty or missing data
+
+**Solutions**:
+1. Check database entries exist in `../music-projects-database/`
+2. Verify UUIDs in agenda/repertoire match project UUIDs
+3. Ensure YAML frontmatter is valid (proper indentation)
+4. Run `python3 generate.py` again to regenerate
+
+### Changes don't appear in generated site
+
+**Problem**: Modified database but site hasn't updated
+
+**Solutions**:
+1. Did you commit database changes? (`git add . && git commit`)
+2. Did you run `python3 generate.py`? (from music-projects-website folder)
+3. Did you reload html/index.html in browser? (hard refresh: Cmd+Shift+R)
+4. Check git status: `git status` should show modified `html/` files
+
+### Score links don't work
+
+**Problem**: Score PDF buttons don't link to files
+
+**Solutions**:
+1. Check music entry has `score_url:` field with valid URL
+2. Verify URL is accessible (test in browser directly)
+3. Rebuild with `python3 generate.py`
+4. Inspect HTML source to confirm URL is there
+
+### Location information missing from Schedule tab
+
+**Problem**: Rehearsals show no venue information
+
+**Solutions**:
+1. Verify agenda entry has `location_id:` field
+2. Confirm location UUID exists in `locations/` table
+3. Check location entry has `location:` and `address:` fields
+4. Rebuild with `python3 generate.py`
+
+For detailed debugging, see **[CLAUDE.md](./CLAUDE.md#debugging)**.
 
 ---
 
