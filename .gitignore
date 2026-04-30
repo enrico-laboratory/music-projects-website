@@ -1,0 +1,33 @@
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+dist/
+build/
+
+# Legacy/Unused
+src/
+node_modules/
+package.json
+package-lock.json
+
+# Environment
+.env
+.env.local
+
+# Temporary
+*.tmp
+.cache/

@@ -1,0 +1,39 @@
+name: Build and Deploy Website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+        with:
+          path: website
+
+      - name: Checkout database
+        uses: actions/checkout@v4
+        with:
+          repository: enrico-laboratory/music-projects-database
+          path: music-projects-database
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Build website
+        run: |
+          cd website
+          python3 generate.py
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/html
+          cname: projects.enricoruggieri.com
