@@ -288,40 +288,40 @@ python3 generate.py
 
 ## Deployment
 
-### GitHub Pages (Current Setup)
+### GitHub Pages Deployment (Manual)
 
-The deployment pipeline is fully automated via GitHub Actions.
+The website is deployed to GitHub Pages from the `gh-pages` branch. No automated CI/CD is used.
 
-**Workflow File**: `.github/workflows/build-and-deploy.yml`
-
-**How it works**:
-1. Edit database in `../music-projects-database`
-2. Run `python3 generate.py` locally to generate HTML
-3. Stage and commit: `git add html/` → `git commit -m "..."`
-4. Push to main: `git push origin main`
-5. GitHub Actions automatically:
-   - Checks out the repo
-   - Deploys `./html` folder to gh-pages branch
-   - Updates CNAME: `projects.enricoruggieri.com`
+**Deployment Workflow**:
+1. You generate HTML locally: `python3 generate.py`
+2. You commit and push: `git add html/ && git commit && git push origin main`
+3. **I deploy to gh-pages** by running:
+   ```bash
+   git fetch origin gh-pages
+   git checkout gh-pages
+   rm -rf * .gitignore
+   cp -r html/* .
+   git add .
+   git commit -m "Deploy: updated projects"
+   git push origin gh-pages
+   ```
 
 **Result**:
+- All 40 projects deployed to GitHub Pages
 - Site live at: https://projects.enricoruggieri.com (after DNS setup)
-- Temporary GitHub URL: https://enrico-laboratory.github.io/music-projects-website/
+- Temporary URL: https://enrico-laboratory.github.io/music-projects-website/
 
-**Manual Setup Steps** (already complete):
-- Created gh-pages branch with initial HTML content
-- Configured GitHub Pages in repo settings (Source: gh-pages branch, root folder)
-- Added CNAME entry pointing to enrico-laboratory.github.io
+**Why this approach**:
+- No CI/CD complexity or failures
+- Full control over when deployments happen
+- Simple and transparent workflow
+- Easy to troubleshoot issues
 
 ### DNS Configuration
 
 To use the custom domain `projects.enricoruggieri.com`:
 1. Point DNS CNAME record to `enrico-laboratory.github.io`
 2. GitHub will automatically validate and enable HTTPS
-
-### Alternative Deployment
-
-**Netlify/Vercel**: Connect repo, set build command to `python3 generate.py`, publish `html/` folder.
 
 ---
 

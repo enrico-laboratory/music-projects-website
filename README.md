@@ -52,11 +52,12 @@ python3 generate.py
 
 # Output:
 # Loading database...
-# Generating 3 project pages...
+# Generating 40 project pages...
 # ✓ Generated index.html
-# ✓ Generated festa.html (45 agenda, 26 music)
 # ✓ Generated a-day-with-arianna.html (1 agenda, 4 music)
-# ✓ Generated echos-of-venice.html (5 agenda, 13 music)
+# ✓ Generated festa.html (45 agenda, 26 music)
+# ... (38 more projects)
+# Done! 40 projects generated.
 ```
 
 #### 3. Test the Generated Site
@@ -88,16 +89,29 @@ git commit -m "Rebuild website after adding May concert
 - All pages reflect latest database state"
 ```
 
-#### 5. Deploy to Production
+#### 5. Push to Main Branch
 
 ```bash
-# Push to GitHub Pages
+# Push generated files to main branch
 git push origin main
-git subtree push --prefix html origin gh-pages
-
-# Or deploy to Netlify/Vercel
-# (automatic if configured with build command: python3 generate.py)
 ```
+
+#### 6. Deploy to GitHub Pages
+
+Ask Claude: "Deploy the website to GitHub Pages"
+
+Claude will run:
+```bash
+git fetch origin gh-pages
+git checkout gh-pages
+rm -rf * .gitignore
+cp -r html/* .
+git add .
+git commit -m "Deploy: updated projects"
+git push origin gh-pages
+```
+
+Your website updates at https://projects.enricoruggieri.com
 
 ### Important Rules
 
