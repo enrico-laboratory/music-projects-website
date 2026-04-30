@@ -108,7 +108,7 @@ def get_project_agenda(project_uuid, agenda_entries):
         if item.get('music_project_id') == project_uuid:
             items.append(item)
 
-    items.sort(key=lambda x: x.get('do_date', '9999-12-31'))
+    items.sort(key=lambda x: x.get('do_date', '0000-01-01'), reverse=True)
     return items
 
 def parse_divisi_table(markdown_text):
@@ -190,7 +190,7 @@ def get_project_repertoire(project_uuid, repertoire_entries, music_entries):
 
 def generate_index_html(projects):
     """Generate the index page."""
-    projects_sorted = sorted(projects, key=lambda x: int(x.get('year', '0')))
+    projects_sorted = sorted(projects, key=lambda x: int(x.get('year', '0')), reverse=True)
 
     cards = ''
     for proj in projects_sorted:
