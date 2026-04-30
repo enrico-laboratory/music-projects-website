@@ -279,14 +279,15 @@ The `html/` folder is ready for static hosting:
 
 - **Any static host** — Upload contents of `html/` folder
 
-## POC Status
+## Project Coverage
 
-Current build includes 3 proof-of-concept projects:
-- Festa (2022, 45 rehearsals, 26 music pieces)
-- A day with Arianna (2024, 1 concert, 4 music pieces)
-- Echos of Venice (2027, 5 rehearsals, 13 music pieces)
+The website currently publishes **40 music projects** from the database, including:
+- Festa (2022) — 45 rehearsals, 26 music pieces
+- A day with Arianna (2024) — 1 concert, 4 music pieces
+- Echos of Venice (2027) — 5 rehearsals, 13 music pieces
+- And 37 additional projects
 
-To add more projects, modify `POC_PROJECTS` list in `generate.py` and regenerate.
+All projects are automatically included. Run `python3 generate.py` to generate pages for all projects in the database.
 
 ---
 
