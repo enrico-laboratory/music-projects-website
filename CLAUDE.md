@@ -196,6 +196,77 @@ Key classes:
 - No caching needed since builds are clean each time
 - All operations are I/O bound (file reads), not CPU intensive
 
+## Complete Workflow: Database to Website
+
+### Step-by-Step Process
+
+**1. Edit Database Entries**
+```
+In ../music-projects-database repo:
+- Modify composers/ entries
+- Update music/ entries with scores
+- Edit repertoire/ to add divisi tables
+- Update agenda/ rehearsals/concerts
+- Edit locations/ venue details
+```
+
+**2. Generate Static Website**
+```bash
+# From music-projects-website directory
+python3 generate.py
+# ✓ Reads from ../music-projects-database
+# ✓ Filters POC projects by UUID
+# ✓ Resolves all UUID relationships
+# ✓ Parses divisi from markdown
+# ✓ Generates html/ folder
+```
+
+**3. Review Locally**
+```bash
+# Open in browser
+open html/index.html
+
+# Check all 3 projects display
+# Verify all 4 tabs work (Description, Schedule, Music, Divisi)
+# Test responsive design
+```
+
+**4. Commit to Git**
+```bash
+git add html/
+git commit -m "Update music projects website (POC batch)"
+git push origin main
+```
+
+**5. GitHub Actions Deploys**
+- Automatically triggered by push to main
+- Deploys html/ to gh-pages branch
+- Site updates at projects.enricoruggieri.com (if DNS configured)
+- No manual deployment steps needed
+
+### When to Rebuild
+
+Run `python3 generate.py` when:
+- Adding a new project (add UUID to POC_PROJECTS list in generate.py)
+- Updating project details (title, description, year, status)
+- Adding/modifying rehearsals or concerts
+- Adding/updating repertoire pieces
+- Adding divisi information
+- Updating scores or composer names
+- Adding locations or changing addresses
+
+### Directory Isolation
+
+Keep two repos separate:
+- **music-projects-database**: Source data (all projects, all composers, all music)
+- **music-projects-website**: Generated website (only POC projects, static HTML)
+
+The website repo does NOT contain database files. It only contains:
+- generate.py (build script)
+- html/ (generated output)
+- layout/ (markdown templates)
+- .github/workflows/ (deployment automation)
+
 ## Testing
 
 ### Validation Before Deploy
@@ -223,12 +294,38 @@ python3 generate.py
 
 ## Deployment
 
-The `html/` folder is production-ready static content:
+### GitHub Pages (Current Setup)
 
-**GitHub Pages**:
-```bash
-git subtree push --prefix html origin gh-pages
-```
+The deployment pipeline is fully automated via GitHub Actions.
+
+**Workflow File**: `.github/workflows/build-and-deploy.yml`
+
+**How it works**:
+1. Edit database in `../music-projects-database`
+2. Run `python3 generate.py` locally to generate HTML
+3. Stage and commit: `git add html/` → `git commit -m "..."`
+4. Push to main: `git push origin main`
+5. GitHub Actions automatically:
+   - Checks out the repo
+   - Deploys `./html` folder to gh-pages branch
+   - Updates CNAME: `projects.enricoruggieri.com`
+
+**Result**:
+- Site live at: https://projects.enricoruggieri.com (after DNS setup)
+- Temporary GitHub URL: https://enrico-laboratory.github.io/music-projects-website/
+
+**Manual Setup Steps** (already complete):
+- Created gh-pages branch with initial HTML content
+- Configured GitHub Pages in repo settings (Source: gh-pages branch, root folder)
+- Added CNAME entry pointing to enrico-laboratory.github.io
+
+### DNS Configuration
+
+To use the custom domain `projects.enricoruggieri.com`:
+1. Point DNS CNAME record to `enrico-laboratory.github.io`
+2. GitHub will automatically validate and enable HTTPS
+
+### Alternative Deployment
 
 **Netlify/Vercel**: Connect repo, set build command to `python3 generate.py`, publish `html/` folder.
 
@@ -237,4 +334,5 @@ git subtree push --prefix html origin gh-pages
 **Last updated**: 2026-04-30
 **Build system**: Python 3.14+
 **External dependencies**: None
-**Generated output**: 4 project pages + 1 index page (POC)
+**Generated output**: 3 project pages + 1 index page (POC)
+**Deployment**: GitHub Actions + GitHub Pages (gh-pages branch)
