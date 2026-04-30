@@ -16,8 +16,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html
-          cname: projects.enricoruggieri.com
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git fetch origin gh-pages
+          git checkout gh-pages
+          rm -rf * .gitignore
+          cp -r html/* .
+          git add .
+          git commit -m "Deploy: $(date)" || echo "No changes to commit"
+          git push origin gh-pages
