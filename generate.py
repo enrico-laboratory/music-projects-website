@@ -179,7 +179,13 @@ def get_project_repertoire(project_uuid, repertoire_entries, music_entries):
                 rep['voices'] = music.get('voices')
             items.append(rep)
 
-    items.sort(key=lambda x: int(x.get('order', '999')))
+    # Sort by order, handling non-numeric values
+    def get_order(item):
+        try:
+            return int(item.get('order', '999'))
+        except (ValueError, TypeError):
+            return 999
+    items.sort(key=get_order)
     return items
 
 def generate_index_html(projects):
@@ -427,6 +433,13 @@ def generate_project_html(project, agenda_items, repertoire_items, composers, lo
 </html>'''
     return html
 
+def slugify(text):
+    """Convert text to URL-safe slug."""
+    slug = text.lower()
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    slug = re.sub(r'[-\s]+', '-', slug)
+    return slug.strip('-')
+
 def main():
     print('Loading database...')
     projects = load_entries('music-projects')
@@ -436,33 +449,31 @@ def main():
     composers = load_entries('composers')
     locations = load_entries('locations')
 
-    # POC projects
-    poc_uuids = {
-        '1f455d91-01a7-4d64-a4b9-84bd22c8155e': 'a-day-with-arianna',
-        'aeed0ea2-ed36-4e12-b17a-b1f155ecf38c': 'festa',
-        '32897f66-5e26-80eb-b724-ed78d2e0266f': 'echos-of-venice'
-    }
+    # Load all projects and generate filenames
+    all_projects = []
+    for uuid, proj in projects.items():
+        proj_copy = proj.copy()
+        proj_copy['uuid'] = uuid
+        title = proj_copy.get('title', 'Untitled')
+        proj_copy['filename'] = slugify(title)
+        all_projects.append((uuid, proj_copy))
 
-    poc_projects = []
-    for uuid, filename in poc_uuids.items():
-        if uuid in projects:
-            proj = projects[uuid].copy()
-            proj['filename'] = filename
-            poc_projects.append(proj)
+    # Sort by title
+    all_projects.sort(key=lambda x: x[1].get('title', ''))
 
     # Create output directory
     PROJECTS_PATH.mkdir(parents=True, exist_ok=True)
 
-    print(f'Generating {len(poc_projects)} project pages...')
+    print(f'Generating {len(all_projects)} project pages...')
 
     # Generate index
-    index_html = generate_index_html(poc_projects)
+    project_list = [proj for _, proj in all_projects]
+    index_html = generate_index_html(project_list)
     (HTML_PATH / 'index.html').write_text(index_html)
     print('✓ Generated index.html')
 
     # Generate project pages
-    for proj in poc_projects:
-        uuid = [k for k, v in poc_uuids.items() if v == proj['filename']][0]
+    for uuid, proj in all_projects:
         proj_agenda = get_project_agenda(uuid, agenda)
         proj_repertoire = get_project_repertoire(uuid, repertoire, music)
 
@@ -470,7 +481,7 @@ def main():
         (PROJECTS_PATH / f"{proj['filename']}.html").write_text(html)
         print(f"✓ Generated {proj['filename']}.html ({len(proj_agenda)} agenda, {len(proj_repertoire)} music)")
 
-    print('\nDone! Open html/index.html to view.')
+    print(f'\nDone! {len(all_projects)} projects generated. Open html/index.html to view.')
 
 if __name__ == '__main__':
     main()
