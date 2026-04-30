@@ -100,18 +100,39 @@ git push origin main
 
 Ask Claude: "Deploy the website to GitHub Pages"
 
-Claude will run:
+Claude will execute the deployment workflow:
+
 ```bash
-git fetch origin gh-pages
+# 1. Backup the generated HTML files
+mkdir -p /tmp/backup && cp -r html/* /tmp/backup/
+
+# 2. Switch to gh-pages branch and reset to clean state
 git checkout gh-pages
-rm -rf * .gitignore
-cp -r html/* .
+git reset --hard
+git clean -fd
+
+# 3. Copy new HTML files to gh-pages root
+cp -r /tmp/backup/* .
+
+# 4. Commit all changes
 git add .
-git commit -m "Deploy: updated projects"
-git push origin gh-pages
+git commit -m "Deploy: [description of changes]"
+
+# 5. Push to GitHub (force push replaces entire gh-pages branch)
+git push origin gh-pages --force
+
+# 6. Return to main branch
+git checkout main
 ```
 
 Your website updates at https://projects.enricoruggieri.com
+
+**Why this approach?**
+- `git reset --hard` ensures gh-pages is clean before deployment
+- `git clean -fd` removes untracked files
+- Force push (`--force`) replaces gh-pages entirely to match current html/
+- Safe because gh-pages is deployment-only, not for development
+- CNAME file persists because it's in the html/ folder
 
 ### Important Rules
 

@@ -293,17 +293,27 @@ python3 generate.py
 The website is deployed to GitHub Pages from the `gh-pages` branch. No automated CI/CD is used.
 
 **Deployment Workflow**:
+
 1. You generate HTML locally: `python3 generate.py`
 2. You commit and push: `git add html/ && git commit && git push origin main`
-3. **I deploy to gh-pages** by running:
+3. **I deploy to gh-pages** using this command sequence:
    ```bash
-   git fetch origin gh-pages
+   # Backup generated HTML
+   mkdir -p /tmp/backup && cp -r html/* /tmp/backup/
+   
+   # Checkout gh-pages and clean it
    git checkout gh-pages
-   rm -rf * .gitignore
-   cp -r html/* .
+   git reset --hard
+   git clean -fd
+   
+   # Copy new HTML and deploy
+   cp -r /tmp/backup/* .
    git add .
-   git commit -m "Deploy: updated projects"
-   git push origin gh-pages
+   git commit -m "Deploy: [description]"
+   git push origin gh-pages --force
+   
+   # Return to main
+   git checkout main
    ```
 
 **Result**:
@@ -314,6 +324,9 @@ The website is deployed to GitHub Pages from the `gh-pages` branch. No automated
 **Why this approach**:
 - No CI/CD complexity or failures
 - Full control over when deployments happen
+- `git reset --hard` ensures clean deployment state
+- Force push replaces gh-pages entirely with current html/
+- CNAME file persists because it's in html/ folder
 - Simple and transparent workflow
 - Easy to troubleshoot issues
 
@@ -328,6 +341,6 @@ To use the custom domain `projects.enricoruggieri.com`:
 **Last updated**: 2026-04-30
 **Build system**: Python 3.14+
 **External dependencies**: None
-**Generated output**: 40 project pages + 1 index page
-**Deployment**: GitHub Actions + GitHub Pages (gh-pages branch)
+**Generated output**: 40 project pages + 1 index page + CNAME
+**Deployment**: Manual (Claude) + GitHub Pages (gh-pages branch)
 **Scope**: All music projects from database (full production website)
