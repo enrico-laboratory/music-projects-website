@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A static website generator that publishes information about music projects. The site reads content from the [music-projects-database](../music-projects-database) workspace and renders it as a fully-featured HTML/CSS website.
+A static website generator that publishes information about all music projects. The site reads content from the [music-projects-database](../music-projects-database) workspace and renders it as a fully-featured HTML/CSS website with 40 projects.
 
-The database contains 9 tables organized as Markdown files with YAML frontmatter. The build process generates static HTML pages with 4 tabs per project:
+The database contains 9 tables organized as Markdown files with YAML frontmatter. The build process generates a page for each project with 4 tabs:
 - **Description** — Project overview and concert dates with locations
 - **Schedule** — Rehearsals and concerts with location/address on the right and program details
 - **Music** — Repertoire list with composer names and score links
@@ -40,7 +40,7 @@ python3 generate.py
 
 This script:
 1. Loads all database entries from `../music-projects-database`
-2. Filters for POC projects (defined in `POC_PROJECTS` list)
+2. Filters for Production projects (defined in `Production_PROJECTS` list)
 3. Resolves relationships between tables via UUIDs
 4. Extracts divisi information from repertoire markdown
 5. Generates static HTML to `html/` folder
@@ -58,14 +58,8 @@ This script:
 - `extract_program()` — Extracts program details from agenda markdown
 - `generate_project_html()` — Renders project pages with all tabs
 
-**POC Configuration**:
-```python
-POC_PROJECTS = [
-    '1f455d91-01a7-4d64-a4b9-84bd22c8155e',  # A day with Arianna
-    'aeed0ea2-ed36-4e12-b17a-b1f155ecf38c',  # Festa
-    '32897f66-5e26-80eb-b724-ed78d2e0266f'   # Echos of Venice
-]
-```
+**Project Generation**:
+The script automatically loads all projects from the database and generates a page for each. Projects are sorted alphabetically by title and assigned URL-safe filenames using the `slugify()` function.
 
 ## Working with the Database
 
@@ -119,7 +113,7 @@ music-projects-database/
 
 ### Index Page
 
-Shows all POC projects in chronological order with:
+Shows all Production projects in chronological order with:
 - Project title
 - Year
 - Status badge (Completed/On Going/Cancelled)
@@ -215,7 +209,7 @@ In ../music-projects-database repo:
 # From music-projects-website directory
 python3 generate.py
 # ✓ Reads from ../music-projects-database
-# ✓ Filters POC projects by UUID
+# ✓ Filters Production projects by UUID
 # ✓ Resolves all UUID relationships
 # ✓ Parses divisi from markdown
 # ✓ Generates html/ folder
@@ -226,7 +220,7 @@ python3 generate.py
 # Open in browser
 open html/index.html
 
-# Check all 3 projects display
+# Check all 40 projects display
 # Verify all 4 tabs work (Description, Schedule, Music, Divisi)
 # Test responsive design
 ```
@@ -234,7 +228,7 @@ open html/index.html
 **4. Commit to Git**
 ```bash
 git add html/
-git commit -m "Update music projects website (POC batch)"
+git commit -m "Update music projects website (Production batch)"
 git push origin main
 ```
 
@@ -247,7 +241,7 @@ git push origin main
 ### When to Rebuild
 
 Run `python3 generate.py` when:
-- Adding a new project (add UUID to POC_PROJECTS list in generate.py)
+- Adding a new project to the database
 - Updating project details (title, description, year, status)
 - Adding/modifying rehearsals or concerts
 - Adding/updating repertoire pieces
@@ -259,7 +253,7 @@ Run `python3 generate.py` when:
 
 Keep two repos separate:
 - **music-projects-database**: Source data (all projects, all composers, all music)
-- **music-projects-website**: Generated website (only POC projects, static HTML)
+- **music-projects-website**: Generated website (all projects rendered as static HTML)
 
 The website repo does NOT contain database files. It only contains:
 - generate.py (build script)
@@ -275,7 +269,7 @@ The website repo does NOT contain database files. It only contains:
 python3 generate.py
 # Check:
 # - No errors during generation
-# - All POC projects generated
+# - All Production projects generated
 # - All links work (open html/index.html)
 # - Responsive design works on mobile/tablet/desktop
 # - All tabs load content
@@ -283,7 +277,7 @@ python3 generate.py
 
 ### Manual Checks
 
-- [ ] Homepage shows all 3 projects in order
+- [ ] Homepage shows all 40 projects in alphabetical order
 - [ ] Clicking project opens detail page
 - [ ] All 4 tabs are present and functional
 - [ ] Description tab shows concerts with locations
@@ -334,5 +328,6 @@ To use the custom domain `projects.enricoruggieri.com`:
 **Last updated**: 2026-04-30
 **Build system**: Python 3.14+
 **External dependencies**: None
-**Generated output**: 3 project pages + 1 index page (POC)
+**Generated output**: 40 project pages + 1 index page
 **Deployment**: GitHub Actions + GitHub Pages (gh-pages branch)
+**Scope**: All music projects from database (full production website)
