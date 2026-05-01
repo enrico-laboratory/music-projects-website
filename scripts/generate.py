@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 
 DB_PATH = Path(__file__).parent.parent / 'music-projects-database'
-HTML_PATH = Path(__file__).parent / 'html'
+HTML_PATH = Path(__file__).parent.parent / 'html'
 PROJECTS_PATH = HTML_PATH / 'projects'
 
 def parse_yaml(content):
