@@ -292,6 +292,16 @@ python3 generate.py
 
 ## Deployment
 
+### Important: "Rebuild Website" Always Includes Deployment
+
+When asked to "rebuild the website" or "regenerate", always complete the full workflow:
+1. Commit any pending changes in music-projects-database
+2. Run `python3 scripts/generate.py` 
+3. Commit the generated html/ files
+4. **Execute the Deployment Workflow below** to deploy to gh-pages
+
+This is one complete operation — do not stop after step 3.
+
 ### GitHub Pages Deployment (Manual)
 
 The website is deployed to GitHub Pages from the `gh-pages` branch. No automated CI/CD is used.
