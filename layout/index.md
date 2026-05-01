@@ -56,4 +56,4 @@ Example CSS customizations:
 
 ## Output
 
-The `generate.py` script renders this as `html/index.html` with live project data.
+The `scripts/generate.py` script renders this as `html/index.html` with live project data.

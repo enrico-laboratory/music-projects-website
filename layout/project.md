@@ -165,4 +165,4 @@ The `generate.py` script injects these values:
 
 ## Output
 
-The `generate.py` script renders each project as `html/projects/{uuid}.html` with live data and this layout.
+The `scripts/generate.py` script renders each project as `html/projects/{uuid}.html` with live data and this layout.

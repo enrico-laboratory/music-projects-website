@@ -14,7 +14,7 @@ Edit database
         │
         ├─→ [COMMIT database changes]
         │
-        ├─→ Run: python3 generate.py
+        ├─→ Run: python3 scripts/generate.py
         │
         ├─→ Review generated HTML
         │   (html/*.html)
@@ -48,7 +48,7 @@ git commit -m "Add concert on May 15, 2024"
 cd ../music-projects-website
 
 # Build static HTML from updated database
-python3 generate.py
+python3 scripts/generate.py
 
 # Output:
 # Loading database...
@@ -158,7 +158,7 @@ Your website updates at https://projects.enricoruggieri.com
 
 ```bash
 # Generate static HTML from database
-python3 generate.py
+python3 scripts/generate.py
 
 # Opens the generated site
 open html/index.html
@@ -166,7 +166,7 @@ open html/index.html
 
 ### Project Structure
 
-- **`generate.py`** — Python script that reads the database and generates static HTML files
+- **`scripts/generate.py`** — Python script that reads the database and generates static HTML files
 - **`layout/`** — Markdown templates for customizing page layouts (edit these to change the design)
 - **`html/`** — Generated static website (output folder, ready for deployment)
   - `index.html` — Homepage listing all projects
@@ -204,7 +204,7 @@ Modify `html/css/style.css` directly for styling changes (colors, fonts, spacing
 To add/edit content:
 
 1. Edit files in `../music-projects-database`
-2. Run `python3 generate.py`
+2. Run `python3 scripts/generate.py`
 3. The HTML is regenerated automatically
 
 ## Page Structure
@@ -244,7 +244,7 @@ See `../music-projects-database/README.md` and `../music-projects-database/Notio
 
 ### Manual Rebuild
 
-Run `python3 generate.py` whenever you:
+Run `python3 scripts/generate.py` whenever you:
 - Add a new project to the database
 - Edit project details (description, year, status)
 - Add/remove rehearsals or concerts
@@ -276,7 +276,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - run: python3 generate.py
+      - run: python3 scripts/generate.py
       - run: git add html/
       - run: git commit -m "Auto-rebuild website"
       - run: git push
@@ -322,7 +322,7 @@ The website currently publishes **40 music projects** from the database, includi
 - Echos of Venice (2027) — 5 rehearsals, 13 music pieces
 - And 37 additional projects
 
-All projects are automatically included. Run `python3 generate.py` to generate pages for all projects in the database.
+All projects are automatically included. Run `python3 scripts/generate.py` to generate pages for all projects in the database.
 
 ---
 
@@ -336,7 +336,7 @@ All projects are automatically included. Run `python3 generate.py` to generate p
 1. Check database entries exist in `../music-projects-database/`
 2. Verify UUIDs in agenda/repertoire match project UUIDs
 3. Ensure YAML frontmatter is valid (proper indentation)
-4. Run `python3 generate.py` again to regenerate
+4. Run `python3 scripts/generate.py` again to regenerate
 
 ### Changes don't appear in generated site
 
@@ -344,7 +344,7 @@ All projects are automatically included. Run `python3 generate.py` to generate p
 
 **Solutions**:
 1. Did you commit database changes? (`git add . && git commit`)
-2. Did you run `python3 generate.py`? (from music-projects-website folder)
+2. Did you run `python3 scripts/generate.py`? (from music-projects-website folder)
 3. Did you reload html/index.html in browser? (hard refresh: Cmd+Shift+R)
 4. Check git status: `git status` should show modified `html/` files
 
@@ -355,7 +355,7 @@ All projects are automatically included. Run `python3 generate.py` to generate p
 **Solutions**:
 1. Check music entry has `score_url:` field with valid URL
 2. Verify URL is accessible (test in browser directly)
-3. Rebuild with `python3 generate.py`
+3. Rebuild with `python3 scripts/generate.py`
 4. Inspect HTML source to confirm URL is there
 
 ### Location information missing from Schedule tab
@@ -366,7 +366,7 @@ All projects are automatically included. Run `python3 generate.py` to generate p
 1. Verify agenda entry has `location_id:` field
 2. Confirm location UUID exists in `locations/` table
 3. Check location entry has `location:` and `address:` fields
-4. Rebuild with `python3 generate.py`
+4. Rebuild with `python3 scripts/generate.py`
 
 For detailed debugging, see **[CLAUDE.md](./CLAUDE.md#debugging)**.
 

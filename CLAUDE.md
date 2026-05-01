@@ -4,6 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
+Name: Music Projects Website
+Abbreviation: MPW
+
 A static website generator that publishes information about all music projects. The site reads content from the [music-projects-database](../music-projects-database) workspace and renders it as a fully-featured HTML/CSS website with 40 projects.
 
 The database contains 9 tables organized as Markdown files with YAML frontmatter. The build process generates a page for each project with 4 tabs:
@@ -18,7 +21,8 @@ The database contains 9 tables organized as Markdown files with YAML frontmatter
 music-projects-website/
 ├── CLAUDE.md              # This file
 ├── README.md              # Build instructions and deployment guide
-├── generate.py            # Python build script (no dependencies needed)
+├── scripts/               # Python build scripts
+│   └── generate.py        # Python build script (no dependencies needed)
 ├── layout/                # Markdown layout templates (user-editable)
 │   ├── index.md           # Homepage template
 │   └── project.md         # Project detail page template
@@ -35,7 +39,7 @@ music-projects-website/
 ### Running the Build
 
 ```bash
-python3 generate.py
+python3 scripts/generate.py
 ```
 
 This script:
@@ -47,7 +51,7 @@ This script:
 
 ### Build Script Details
 
-**Location**: `generate.py`
+**Location**: `scripts/generate.py`
 
 **Key Functions**:
 - `parse_yaml()` — Parses YAML frontmatter without external dependencies
@@ -207,7 +211,7 @@ In ../music-projects-database repo:
 **2. Generate Static Website**
 ```bash
 # From music-projects-website directory
-python3 generate.py
+python3 scripts/generate.py
 # ✓ Reads from ../music-projects-database
 # ✓ Filters Production projects by UUID
 # ✓ Resolves all UUID relationships
@@ -240,7 +244,7 @@ git push origin main
 
 ### When to Rebuild
 
-Run `python3 generate.py` when:
+Run `python3 scripts/generate.py` when:
 - Adding a new project to the database
 - Updating project details (title, description, year, status)
 - Adding/modifying rehearsals or concerts
