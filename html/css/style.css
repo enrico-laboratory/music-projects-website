@@ -147,6 +147,20 @@ header p {
   letter-spacing: 0.5px;
 }
 
+.choir-name {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0.25rem 0 0;
+  font-weight: 500;
+}
+
+.project-choir {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
 .project-card .excerpt {
   color: #666;
   margin-bottom: 1rem;

@@ -101,6 +101,22 @@ def get_location_details(location_uuid, locations):
         return name, full_address
     return None, None
 
+def build_choir_lookup(choirs):
+    """Build a lookup map from project UUID (no dashes) to choir name."""
+    lookup = {}
+    for choir_uuid, choir in choirs.items():
+        choir_name = choir.get('choir', 'Unknown')
+        projects = choir.get('projects', [])
+        for proj_id in projects:
+            if isinstance(proj_id, str):
+                lookup[proj_id] = choir_name
+    return lookup
+
+def get_choir_name(project_uuid, choir_lookup):
+    """Get choir name for a project UUID."""
+    project_id_no_dashes = project_uuid.replace('-', '')
+    return choir_lookup.get(project_id_no_dashes, 'Unknown')
+
 def get_project_agenda(project_uuid, agenda_entries):
     """Get agenda items for a project."""
     items = []
@@ -198,6 +214,7 @@ def generate_index_html(projects):
         cards += f'''        <div class="project-card {status_class}">
           <div class="project-header">
             <h2><a href="projects/{proj['filename']}.html">{proj.get('title', 'Untitled')}</a></h2>
+            {f'<p class="choir-name">{proj.get("choir_name", "")}</p>' if proj.get('choir_name') else ''}
             <span class="year">{proj.get('year', 'N/A')}</span>
           </div>
           <p class="status">{proj.get('status', 'Unknown')}</p>
@@ -374,6 +391,7 @@ def generate_project_html(project, agenda_items, repertoire_items, composers, lo
     <header>
       <a href="../index.html" class="back-link">← Back to Projects</a>
       <h1>{project_name}</h1>
+      {f'<p class="project-choir">{project.get("choir_name", "")}</p>' if project.get('choir_name') else ''}
       <div class="project-meta">
         <span class="year">Year: {project.get('year', 'N/A')}</span>
         <span class="status">{project.get('status', 'Unknown')}</span>
@@ -448,6 +466,10 @@ def main():
     music = load_entries('music')
     composers = load_entries('composers')
     locations = load_entries('locations')
+    choirs = load_entries('choirs')
+
+    # Build choir lookup
+    choir_lookup = build_choir_lookup(choirs)
 
     # Load all projects and generate filenames
     all_projects = []
@@ -456,6 +478,7 @@ def main():
         proj_copy['uuid'] = uuid
         title = proj_copy.get('title', 'Untitled')
         proj_copy['filename'] = slugify(title)
+        proj_copy['choir_name'] = get_choir_name(uuid, choir_lookup)
         all_projects.append((uuid, proj_copy))
 
     # Sort by title
