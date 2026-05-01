@@ -101,21 +101,43 @@ def get_location_details(location_uuid, locations):
         return name, full_address
     return None, None
 
-def build_choir_lookup(choirs):
+def build_choir_lookup(db_path):
     """Build a lookup map from project UUID (no dashes) to choir name."""
     lookup = {}
-    for choir_uuid, choir in choirs.items():
-        choir_name = choir.get('choir', 'Unknown')
-        projects = choir.get('projects', [])
-        for proj_id in projects:
-            if isinstance(proj_id, str):
-                lookup[proj_id] = choir_name
+    choirs_path = db_path / 'choirs'
+
+    if not choirs_path.exists():
+        return lookup
+
+    for choir_file in choirs_path.glob('*.md'):
+        content = choir_file.read_text(encoding='utf-8')
+        data = parse_yaml(content)
+        choir_name = data.get('choir', 'Unknown')
+
+        # Parse projects list from markdown
+        if '---' in content:
+            parts = content.split('---', 2)
+            if len(parts) > 1:
+                yaml_section = parts[1]
+                # Find projects section
+                in_projects = False
+                for line in yaml_section.split('\n'):
+                    if line.startswith('projects:'):
+                        in_projects = True
+                        continue
+                    if in_projects:
+                        if line.startswith('  - '):
+                            proj_id = line.replace('  - ', '').strip()
+                            if proj_id:
+                                lookup[proj_id] = choir_name
+                        elif line and not line.startswith(' '):
+                            break
+
     return lookup
 
 def get_choir_name(project_uuid, choir_lookup):
-    """Get choir name for a project UUID."""
-    project_id_no_dashes = project_uuid.replace('-', '')
-    return choir_lookup.get(project_id_no_dashes, 'Unknown')
+    """Get choir name for a project UUID (with dashes)."""
+    return choir_lookup.get(project_uuid, 'Unknown')
 
 def get_project_agenda(project_uuid, agenda_entries):
     """Get agenda items for a project."""
@@ -213,8 +235,10 @@ def generate_index_html(projects):
         status_class = proj.get('status', 'unknown').lower().replace(' ', '-')
         cards += f'''        <div class="project-card {status_class}">
           <div class="project-header">
-            <h2><a href="projects/{proj['filename']}.html">{proj.get('title', 'Untitled')}</a></h2>
-            {f'<p class="choir-name">{proj.get("choir_name", "")}</p>' if proj.get('choir_name') else ''}
+            <div class="project-title-group">
+              <h2><a href="projects/{proj['filename']}.html">{proj.get('title', 'Untitled')}</a></h2>
+              {f'<p class="choir-name">{proj.get("choir_name", "")}</p>' if proj.get('choir_name') else ''}
+            </div>
             <span class="year">{proj.get('year', 'N/A')}</span>
           </div>
           <p class="status">{proj.get('status', 'Unknown')}</p>
@@ -466,10 +490,8 @@ def main():
     music = load_entries('music')
     composers = load_entries('composers')
     locations = load_entries('locations')
-    choirs = load_entries('choirs')
-
     # Build choir lookup
-    choir_lookup = build_choir_lookup(choirs)
+    choir_lookup = build_choir_lookup(DB_PATH)
 
     # Load all projects and generate filenames
     all_projects = []
