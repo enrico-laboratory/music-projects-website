@@ -75,6 +75,9 @@ def deploy_to_gh_pages():
     # Return to main
     run_command("git checkout main", "Returning to main branch")
 
+    # Cleanup temporary files
+    run_command("rm -rf /tmp/mpw-backup", "Cleaning up temporary files")
+
     print("\n" + "=" * 60)
     print("✅ DEPLOYMENT COMPLETE")
     print("=" * 60)
