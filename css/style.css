@@ -110,16 +110,12 @@ header p {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.5rem;
-  gap: 1rem;
-}
-
-.project-title-group {
-  flex: 1;
 }
 
 .project-header h2 {
   font-size: 1.3rem;
   margin: 0;
+  flex: 1;
 }
 
 .project-header h2 a {
@@ -149,20 +145,6 @@ header p {
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.choir-name {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  margin: 0.25rem 0 0;
-  font-weight: 500;
-}
-
-.project-choir {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  margin: 0.5rem 0;
-  font-weight: 500;
 }
 
 .project-card .excerpt {

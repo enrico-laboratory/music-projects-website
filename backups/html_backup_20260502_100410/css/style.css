@@ -1,0 +1,612 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+header {
+  background: white;
+  padding: 3rem 1rem;
+  margin-bottom: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #2980b9;
+}
+
+.project-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.project-meta span {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-left: 4px solid #3498db;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.project-card.completed {
+  border-left-color: #27ae60;
+}
+
+.project-card.on-going {
+  border-left-color: #f39c12;
+}
+
+.project-card.cancelled {
+  border-left-color: #e74c3c;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.project-title-group {
+  flex: 1;
+}
+
+.project-header h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.project-header h2 a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.project-header h2 a:hover {
+  color: #3498db;
+}
+
+.project-card .year {
+  display: inline-block;
+  background: #ecf0f1;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #666;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.project-card .status {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.choir-name {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0.25rem 0 0;
+  font-weight: 500;
+}
+
+.project-choir {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+.project-card .excerpt {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+/* Tabs */
+.tabs {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.tab-buttons {
+  display: flex;
+  border-bottom: 1px solid #ecf0f1;
+  background: #f8f9fa;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+  background: #f0f0f0;
+}
+
+.tab-btn.active {
+  color: #3498db;
+  border-bottom-color: #3498db;
+}
+
+.tab-content {
+  display: none;
+  padding: 2rem;
+  animation: fadeIn 0.3s;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tab-content h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.tab-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+/* Dates List */
+.dates-list {
+  list-style: none;
+}
+
+.dates-list li {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-left: 3px solid #3498db;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+}
+
+.dates-list li strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Schedule List */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #3498db;
+  align-items: flex-start;
+}
+
+.schedule-item.concert {
+  border-left-color: #e74c3c;
+}
+
+.schedule-item.rehearsal {
+  border-left-color: #f39c12;
+}
+
+.schedule-item.meeting {
+  border-left-color: #9b59b6;
+}
+
+.schedule-date {
+  font-weight: 600;
+  color: #2c3e50;
+  min-width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.schedule-details {
+  flex: 1;
+}
+
+.schedule-location {
+  text-align: right;
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.schedule-details h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.schedule-details .type {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0.25rem 0;
+}
+
+.schedule-details .location {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0.25rem 0;
+}
+
+.schedule-details .notes {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+}
+
+.schedule-details .time {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0.25rem 0;
+}
+
+.schedule-details .location {
+  color: #27ae60;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background: #f0fdf4;
+  border-radius: 3px;
+}
+
+.schedule-details .location small {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.schedule-location .location {
+  color: #27ae60;
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0.5rem;
+  background: #f0fdf4;
+  border-radius: 3px;
+  text-align: right;
+}
+
+.schedule-location .location small {
+  display: block;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.schedule-details .program {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-left: 3px solid #3498db;
+  border-radius: 3px;
+}
+
+.dates-list li em {
+  display: block;
+  color: #27ae60;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.dates-list li small {
+  display: block;
+  color: #999;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Music List */
+.music-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.music-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #27ae60;
+}
+
+.music-item .order {
+  font-weight: 600;
+  color: #3498db;
+  min-width: 40px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.music-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.music-info .composer {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+  font-style: italic;
+}
+
+.music-info .voices {
+  color: #3498db;
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.music-info .notes {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.music-info .score-link {
+  margin: 0.5rem 0 0 0;
+}
+
+.music-info .score-link a {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  transition: background 0.3s;
+}
+
+.music-info .score-link a:hover {
+  background: #2980b9;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  border-top: 1px solid #ecf0f1;
+}
+
+/* Divisi List */
+.divisi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.divisi-item {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-left: 4px solid #9b59b6;
+  border-radius: 4px;
+}
+
+.divisi-header {
+  margin-bottom: 1rem;
+}
+
+.divisi-header h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.divisi-table {
+  background: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ecf0f1;
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.divisi-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.divisi-table table td,
+.divisi-table table th {
+  padding: 0.75rem;
+  border: 1px solid #ecf0f1;
+  text-align: left;
+}
+
+.divisi-table table th {
+  background: #f0f0f0;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.divisi-table table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.divisi-table table tr:hover {
+  background: #f5f5f5;
+}
+
+.no-divisi {
+  color: #999;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-buttons {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    min-width: 100%;
+  }
+
+  .schedule-item {
+    flex-direction: column;
+  }
+
+  .schedule-date {
+    text-align: left;
+  }
+
+  .project-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 1.5rem 1rem;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  .project-header {
+    flex-direction: column;
+  }
+
+  .project-header .year {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}

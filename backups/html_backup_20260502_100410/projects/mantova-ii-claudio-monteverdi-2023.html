@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mantova II: Claudio Monteverdi 2023 - Music Projects</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="back-link">← Back to Projects</a>
+      <h1>Mantova II: Claudio Monteverdi 2023</h1>
+      <p class="project-choir">Madrigale Den Haag</p>
+      <div class="project-meta">
+        <span class="year">Year: 2023</span>
+        <span class="status">Cancelled</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="showTab(event, 'description')">Description</button>
+          <button class="tab-btn" onclick="showTab(event, 'schedule')">Schedule</button>
+          <button class="tab-btn" onclick="showTab(event, 'music')">Music</button>
+          <button class="tab-btn" onclick="showTab(event, 'divisi')">Divisi</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+          <h2>Project Description</h2>
+          <p>No description available.</p>
+          
+        </div>
+
+        <div id="schedule" class="tab-content">
+          <h2>Rehearsals & Concerts</h2>
+          <p>No schedule items available.</p>
+        </div>
+
+        <div id="music" class="tab-content">
+          <h2>Music Repertoire</h2>
+          <p>No music pieces assigned to this project.</p>
+        </div>
+
+        <div id="divisi" class="tab-content">
+          <h2>Voice Assignments</h2>
+          <p>No voice assignments available.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Enrico Ruggieri. Music Projects</p>
+    </footer>
+  </div>
+
+  <script>
+    function showTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>

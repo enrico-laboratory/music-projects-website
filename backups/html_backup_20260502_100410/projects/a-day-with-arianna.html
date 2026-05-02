@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A day with Arianna - Music Projects</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="back-link">← Back to Projects</a>
+      <h1>A day with Arianna</h1>
+      <p class="project-choir">Madrigale Den Haag</p>
+      <div class="project-meta">
+        <span class="year">Year: 2024</span>
+        <span class="status">Completed</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="showTab(event, 'description')">Description</button>
+          <button class="tab-btn" onclick="showTab(event, 'schedule')">Schedule</button>
+          <button class="tab-btn" onclick="showTab(event, 'music')">Music</button>
+          <button class="tab-btn" onclick="showTab(event, 'divisi')">Divisi</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+          <h2>Project Description</h2>
+          <p>No description available.</p>
+          <h3>Concert Dates</h3>
+<ul class="dates-list"><li><strong>Concert</strong> - Jun 23, 2024<br/><em>Barthkapel</em><br/><small>Brouwersgracht 2K, 2512 ER, Den Haag</small></li></ul>
+        </div>
+
+        <div id="schedule" class="tab-content">
+          <h2>Rehearsals & Concerts</h2>
+          <div class="schedule-list">            <div class="schedule-item concert">
+              <div class="schedule-date">Jun 23, 2024</div>
+              <div class="schedule-details">
+                <h4>Concert</h4>
+                <p class="type">Concert - 10:00</p>
+                <p class="program"><strong>Program:</strong><br/>Workshop</p>
+              </div>
+              <div class="schedule-location">
+                <p class="location"><strong>📍 Barthkapel</strong><br/><small>Brouwersgracht 2K, 2512 ER, Den Haag</small></p>
+              </div>
+            </div>
+</div>
+        </div>
+
+        <div id="music" class="tab-content">
+          <h2>Music Repertoire</h2>
+          <div class="music-list">            <div class="music-item">
+              <span class="order">01</span>
+              <div class="music-info">
+                <h4>Lasciatemi morire - pars I (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1--3QTnsZoKe3JQW7N_oq-2FpCgDcNVXy/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">02</span>
+              <div class="music-info">
+                <h4>O Teseo, Teseo mio - pars II (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">03</span>
+              <div class="music-info">
+                <h4>Dove, dov'è la fede - III pars (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">04</span>
+              <div class="music-info">
+                <h4>Ahi ch'ei non pur risponde - IV pars (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+</div>
+        </div>
+
+        <div id="divisi" class="tab-content">
+          <h2>Voice Assignments</h2>
+          <div class="divisi-list">            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>01. Lasciatemi morire - pars I (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>02. O Teseo, Teseo mio - pars II (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>03. Dove, dov'è la fede - III pars (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>04. Ahi ch'ei non pur risponde - IV pars (Il Lamento d'Arianna)</h4>
+                <p class="composer">Monteverdi, Claudio</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Enrico Ruggieri. Music Projects</p>
+    </footer>
+  </div>
+
+  <script>
+    function showTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À la bataille! - Music Projects</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="back-link">← Back to Projects</a>
+      <h1>À la bataille!</h1>
+      <p class="project-choir">Haags Renaissance Kamerkoor</p>
+      <div class="project-meta">
+        <span class="year">Year: 2019</span>
+        <span class="status">Completed</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="showTab(event, 'description')">Description</button>
+          <button class="tab-btn" onclick="showTab(event, 'schedule')">Schedule</button>
+          <button class="tab-btn" onclick="showTab(event, 'music')">Music</button>
+          <button class="tab-btn" onclick="showTab(event, 'divisi')">Divisi</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+          <h2>Project Description</h2>
+          <p>No description available.</p>
+          <h3>Concert Dates</h3>
+<ul class="dates-list"><li><strong>Concert</strong> - Sep 29, 2019<br/><em>Waalse Kerk</em><br/><small>Noordeinde 25, Den Haag</small></li><li><strong>Concert</strong> - Sep 28, 2019<br/><em>Waalse Kerk</em><br/><small>Noordeinde 25, Den Haag</small></li></ul>
+        </div>
+
+        <div id="schedule" class="tab-content">
+          <h2>Rehearsals & Concerts</h2>
+          <div class="schedule-list">            <div class="schedule-item concert">
+              <div class="schedule-date">Sep 29, 2019</div>
+              <div class="schedule-details">
+                <h4>Concert</h4>
+                <p class="type">Concert - 15:00</p>
+                <p class="program"><strong>Program:</strong><br/>Untitled</p>
+              </div>
+              <div class="schedule-location">
+                <p class="location"><strong>📍 Waalse Kerk</strong><br/><small>Noordeinde 25, Den Haag</small></p>
+              </div>
+            </div>
+            <div class="schedule-item concert">
+              <div class="schedule-date">Sep 28, 2019</div>
+              <div class="schedule-details">
+                <h4>Concert</h4>
+                <p class="type">Concert - 15:00</p>
+                <p class="program"><strong>Program:</strong><br/>Untitled</p>
+              </div>
+              <div class="schedule-location">
+                <p class="location"><strong>📍 Waalse Kerk</strong><br/><small>Noordeinde 25, Den Haag</small></p>
+              </div>
+            </div>
+</div>
+        </div>
+
+        <div id="music" class="tab-content">
+          <h2>Music Repertoire</h2>
+          <p>No music pieces assigned to this project.</p>
+        </div>
+
+        <div id="divisi" class="tab-content">
+          <h2>Voice Assignments</h2>
+          <p>No voice assignments available.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Enrico Ruggieri. Music Projects</p>
+    </footer>
+  </div>
+
+  <script>
+    function showTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
