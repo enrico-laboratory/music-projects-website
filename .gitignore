@@ -31,3 +31,6 @@ package-lock.json
 # Temporary
 *.tmp
 .cache/
+
+# Generated website
+html/
