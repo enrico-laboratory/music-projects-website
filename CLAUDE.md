@@ -292,57 +292,53 @@ python3 generate.py
 
 ## Deployment
 
-### Important: "Rebuild Website" Always Includes Deployment
+### `/mpw-deploy` Command
+
+All deployment operations are handled by the `/mpw-deploy` command. This replaces all manual deployment steps.
+
+**Usage**:
+```bash
+/mpw-deploy          # Full deployment: build + deploy to gh-pages
+/mpw-deploy test     # Local test only: build + open in browser
+```
+
+**Full Deployment Workflow** (`/mpw-deploy`):
+
+1. Builds website with `python3 scripts/generate.py`
+2. Backs up generated HTML
+3. Checks out `gh-pages` branch
+4. Cleans and resets `gh-pages`
+5. Copies new HTML to `gh-pages`
+6. Commits and force-pushes to GitHub Pages
+7. Returns to `main` branch
+
+**Local Test Workflow** (`/mpw-deploy test`):
+
+1. Builds website with `python3 scripts/generate.py`
+2. Opens `html/index.html` in browser
+3. Shows manual validation checklist:
+   - [ ] Homepage shows all projects in alphabetical order
+   - [ ] Clicking project opens detail page
+   - [ ] All 4 tabs are present and functional
+   - [ ] Description tab shows concerts with locations
+   - [ ] Schedule tab shows location on the right
+   - [ ] Music tab shows score links
+   - [ ] Divisi tab shows composer names and tables
+   - [ ] Back button returns to homepage
+
+**Important: "Rebuild Website" Always Includes Deployment**
 
 When asked to "rebuild the website" or "regenerate", always complete the full workflow:
 1. Commit any pending changes in music-projects-database
-2. Run `python3 scripts/generate.py` 
-3. Commit the generated html/ files
-4. **Execute the Deployment Workflow below** to deploy to gh-pages
+2. Run `/mpw-deploy` to build and deploy
+3. Verify deployment succeeded
 
-This is one complete operation — do not stop after step 3.
-
-### GitHub Pages Deployment (Manual)
-
-The website is deployed to GitHub Pages from the `gh-pages` branch. No automated CI/CD is used.
-
-**Deployment Workflow**:
-
-1. You generate HTML locally: `python3 generate.py`
-2. You commit and push: `git add html/ && git commit && git push origin main`
-3. **I deploy to gh-pages** using this command sequence:
-   ```bash
-   # Backup generated HTML
-   mkdir -p /tmp/backup && cp -r html/* /tmp/backup/
-   
-   # Checkout gh-pages and clean it
-   git checkout gh-pages
-   git reset --hard
-   git clean -fd
-   
-   # Copy new HTML and deploy
-   cp -r /tmp/backup/* .
-   git add .
-   git commit -m "Deploy: [description]"
-   git push origin gh-pages --force
-   
-   # Return to main
-   git checkout main
-   ```
+This is one complete operation — do not stop after building.
 
 **Result**:
 - All 40 projects deployed to GitHub Pages
 - Site live at: https://projects.enricoruggieri.com (after DNS setup)
 - Temporary URL: https://enrico-laboratory.github.io/music-projects-website/
-
-**Why this approach**:
-- No CI/CD complexity or failures
-- Full control over when deployments happen
-- `git reset --hard` ensures clean deployment state
-- Force push replaces gh-pages entirely with current html/
-- CNAME file persists because it's in html/ folder
-- Simple and transparent workflow
-- Easy to troubleshoot issues
 
 ### DNS Configuration
 
