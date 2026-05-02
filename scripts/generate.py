@@ -172,6 +172,15 @@ def parse_divisi_table(markdown_text):
     if not data_rows:
         return None
 
+    # Sort rows numerically by first column (staff number)
+    def get_sort_key(row):
+        try:
+            return int(row[0])
+        except (ValueError, IndexError):
+            return float('inf')
+
+    data_rows.sort(key=get_sort_key)
+
     html = '<table><thead><tr>'
     for header in headers:
         html += f'<th>{header}</th>'
