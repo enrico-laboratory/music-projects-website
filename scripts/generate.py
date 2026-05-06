@@ -309,9 +309,16 @@ def generate_project_html(project, agenda_items, repertoire_items, composers, lo
         schedule_html = '<div class="schedule-list">'
         for item in agenda_items:
             date = format_date(item.get('do_date', ''))
-            time = format_time(item.get('do_date', ''))
+            time_start = format_time(item.get('do_date', ''))
+            time_end = format_time(item.get('do_date_end', ''))
             item_type = item.get('type', 'Unknown').lower()
-            time_str = f' - {time}' if time else ''
+
+            if time_start and time_end:
+                time_str = f' - {time_start} to {time_end}'
+            elif time_start:
+                time_str = f' - {time_start}'
+            else:
+                time_str = ''
 
             # Get location
             location_id = item.get('location_id')
