@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mary Program - Music Projects</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="back-link">← Back to Projects</a>
+      <h1>Mary Program</h1>
+      <p class="project-choir">Lassus Consort</p>
+      <div class="project-meta">
+        <span class="year">Year: 2020</span>
+        <span class="status">Completed</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="showTab(event, 'description')">Description</button>
+          <button class="tab-btn" onclick="showTab(event, 'schedule')">Schedule</button>
+          <button class="tab-btn" onclick="showTab(event, 'music')">Music</button>
+          <button class="tab-btn" onclick="showTab(event, 'divisi')">Divisi</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+          <h2>Project Description</h2>
+          <p>No description available.</p>
+          
+        </div>
+
+        <div id="schedule" class="tab-content">
+          <h2>Rehearsals & Concerts</h2>
+          <p>No schedule items available.</p>
+        </div>
+
+        <div id="music" class="tab-content">
+          <h2>Music Repertoire</h2>
+          <div class="music-list">            <div class="music-item">
+              <span class="order">01</span>
+              <div class="music-info">
+                <h4>Salve Sancta Parens</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">02</span>
+              <div class="music-info">
+                <h4>Missa cum Jubilo - Kyrie</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/13mPpJrNXJ1MZ9Wdu-uBVf7ImPD-5bhiE/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">03</span>
+              <div class="music-info">
+                <h4>Missa de Beata Virgine - Kyrie</h4>
+                <p class="composer">Brumel, Antoine</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">04</span>
+              <div class="music-info">
+                <h4>Missa de Beata Virgine - Gloria</h4>
+                <p class="composer">Morales, Cristóbal de</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1Wq7jyFIxwUg0G0unTzgLgVmm8VrYmHA9/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">05</span>
+              <div class="music-info">
+                <h4>Virga jesse floruit</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">06</span>
+              <div class="music-info">
+                <h4>Vergine Bella</h4>
+                <p class="composer">Rore, Cipriano de</p>
+                <p class="score-link"><a href="http://www1.cpdl.org/wiki/index.php/Vergine_bella_(Cipriano_de_Rore" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">07</span>
+              <div class="music-info">
+                <h4>Ave Maria (offertorio)</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">08</span>
+              <div class="music-info">
+                <h4>Missa de Beata Virgine - Sanctus & Benedictus</h4>
+                <p class="composer">Palestrina, Giovanni Pierluigi da</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1dRSWs5TY9zgbOxFdJIHBbpBWCZBs-itB/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">09</span>
+              <div class="music-info">
+                <h4>Missa de Beata Virgine - Agnus Dei</h4>
+                <p class="composer">Josquin</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1CM9QMRMbQuMvuqxbmU0UOqa2srkjf_JT/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">10</span>
+              <div class="music-info">
+                <h4>Ecce Virgo</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">11</span>
+              <div class="music-info">
+                <h4>Regina Coeli</h4>
+                <p class="composer">Esteves, Joao Rodrigues</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1ugTSHcQFtVX0k1lefBWjLJxCAy5-kSKL/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">12</span>
+              <div class="music-info">
+                <h4>Salve Regina</h4>
+                <p class="composer">Melgas, Diogo Dias</p>
+                <p class="score-link"><a href="null" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">13</span>
+              <div class="music-info">
+                <h4>Stabat mater</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">14</span>
+              <div class="music-info">
+                <h4>Assumpta est Maria in caelum</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">15</span>
+              <div class="music-info">
+                <h4>Ave Dulcissima Maria</h4>
+                <p class="composer">Gesualdo, Carlo</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1nMb93WLYkzBDw1Sebxi7tB_EZVGoKXgQ/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">16</span>
+              <div class="music-info">
+                <h4>Alleluia. Tota pulchra es Maria</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">17</span>
+              <div class="music-info">
+                <h4>Ave maria a 5</h4>
+                <p class="composer">Parsons</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/11uZbvGRpglg3dKzMfBvlPgoZgHz6xlK6/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">18</span>
+              <div class="music-info">
+                <h4>Antifona Sancta Maria succure miseris</h4>
+                <p class="composer">Gregoriano</p>
+                <p class="score-link"><a href="-" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">19</span>
+              <div class="music-info">
+                <h4>Magnificat primi toni a 4 voci</h4>
+                <p class="composer">Sabino, Ippolito</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/19RNW7XW1_VcuwbNAUOdnlBt9_Gzu1vvF/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">20</span>
+              <div class="music-info">
+                <h4>Ave Maria</h4>
+                <p class="composer">Lasso, Orlando di</p>
+                <p class="score-link"><a href="https://drive.google.com/open?id=1UFzDcXbTITj9UAFnA-aa-hafT35PNaGt" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+            <div class="music-item">
+              <span class="order">21</span>
+              <div class="music-info">
+                <h4>Ave Maria</h4>
+                <p class="composer">Rold, Manolo da</p>
+                <p class="score-link"><a href="https://drive.google.com/file/d/1xwhbDko3LEU_YkmP--oPUJn7GbRHZcHi/view?usp=sharing" target="_blank">📄 View Score</a></p>
+              </div>
+            </div>
+</div>
+        </div>
+
+        <div id="divisi" class="tab-content">
+          <h2>Voice Assignments</h2>
+          <div class="divisi-list">            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>01. Salve Sancta Parens</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>02. Missa cum Jubilo - Kyrie</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>03. Missa de Beata Virgine - Kyrie</h4>
+                <p class="composer">Brumel, Antoine</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>04. Missa de Beata Virgine - Gloria</h4>
+                <p class="composer">Morales, Cristóbal de</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>05. Virga jesse floruit</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>06. Vergine Bella</h4>
+                <p class="composer">Rore, Cipriano de</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>07. Ave Maria (offertorio)</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>08. Missa de Beata Virgine - Sanctus & Benedictus</h4>
+                <p class="composer">Palestrina, Giovanni Pierluigi da</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>09. Missa de Beata Virgine - Agnus Dei</h4>
+                <p class="composer">Josquin</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>10. Ecce Virgo</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>11. Regina Coeli</h4>
+                <p class="composer">Esteves, Joao Rodrigues</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>12. Salve Regina</h4>
+                <p class="composer">Melgas, Diogo Dias</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>13. Stabat mater</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>14. Assumpta est Maria in caelum</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>15. Ave Dulcissima Maria</h4>
+                <p class="composer">Gesualdo, Carlo</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>16. Alleluia. Tota pulchra es Maria</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>17. Ave maria a 5</h4>
+                <p class="composer">Parsons</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>18. Antifona Sancta Maria succure miseris</h4>
+                <p class="composer">Gregoriano</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>19. Magnificat primi toni a 4 voci</h4>
+                <p class="composer">Sabino, Ippolito</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>20. Ave Maria</h4>
+                <p class="composer">Lasso, Orlando di</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+            <div class="divisi-item">
+              <div class="divisi-header">
+                <h4>21. Ave Maria</h4>
+                <p class="composer">Rold, Manolo da</p>
+              </div>
+<p class="no-divisi">No divisi information available.</p>            </div>
+</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Enrico Ruggieri. Music Projects</p>
+    </footer>
+  </div>
+
+  <script>
+    function showTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
