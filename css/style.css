@@ -556,6 +556,177 @@ footer {
   background-color: rgba(212, 167, 106, 0.1);
 }
 
+/* Description Tab */
+#description h2 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Concert Dates Section */
+.concert-box {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.concert-box h3 {
+  color: var(--gold-accent);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.concert-box .dates-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.concert-box .dates-list li {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--card-bg);
+  border-left: 4px solid #E8A0A0;
+  border-radius: 2px;
+  font-size: 0.9rem;
+}
+
+.concert-box .dates-list li:last-child {
+  margin-bottom: 0;
+}
+
+.concert-box .dates-list strong {
+  color: var(--gold-light);
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.concert-box .dates-list em {
+  color: var(--gold-accent);
+  display: block;
+  font-style: normal;
+  margin-top: var(--spacing-xs);
+}
+
+.concert-box .dates-list small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Upcoming Events Section */
+.upcoming-rehearsals {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.upcoming-rehearsals h3 {
+  color: var(--gold-accent);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.upcoming-rehearsals .dates-list {
+  margin-top: 0;
+}
+
+.upcoming-rehearsals .dates-list li {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--card-bg);
+  border-left: 4px solid var(--gold-accent);
+  border-radius: 2px;
+  font-size: 0.9rem;
+}
+
+.upcoming-rehearsals .dates-list li:last-child {
+  margin-bottom: 0;
+}
+
+.upcoming-rehearsals .dates-list strong {
+  color: var(--gold-light);
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.upcoming-rehearsals .dates-list em {
+  color: var(--gold-accent);
+  display: block;
+  font-style: normal;
+  margin-top: var(--spacing-xs);
+}
+
+.upcoming-rehearsals .dates-list small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.upcoming-rehearsals .dates-list .program {
+  margin-top: var(--spacing-xs);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Locations Summary Section */
+.locations-summary {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.locations-summary h3 {
+  color: var(--gold-accent);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.locations-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.locations-list li {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.9rem;
+  flex: 0 1 calc(50% - var(--spacing-sm));
+  min-width: 200px;
+}
+
+.locations-list li strong {
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.locations-list li small {
+  color: var(--text-muted);
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   header h1 {
@@ -596,6 +767,11 @@ footer {
   .music-item .order {
     order: -1;
     margin-bottom: var(--spacing-xs);
+  }
+
+  .locations-list li {
+    flex: 0 1 100%;
+    min-width: auto;
   }
 }
 
